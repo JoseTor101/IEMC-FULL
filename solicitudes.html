@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitudes</title>
+    <link rel="stylesheet" href="css/inform.css">
+    <link href="img/logo.png" rel="icon">
+    <script src="https://kit.fontawesome.com/5a20391863.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        fetch("http://localhost/p/services/getServices.php")
+            .then((res) => res.json())
+            .then((user) => {
+                document.getElementById("userID").innerHTML = "Hola, " + user.nombre + "!";
+                
+                document.getElementById("fecha").innerHTML = user.fecha_prestacion;
+                document.getElementById("servicio").innerHTML = user.servicio;
+                document.getElementById("dispositivo").innerHTML = user.modelo_dispositivo;
+                document.getElementById("nombre_dispositivo").innerHTML = user.nombre_dispositivo;
+                document.getElementById("codigo_cita").innerHTML = user.codigo_cita;
+            });
+    </script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="sidebar">
+            <img src="img/logo.png" width="200">
+            <ul>
+                <li><a href="menu.html"><i class="fas fa-home"></i>Inicio</a></li>
+                <li><a href="informacion_perfil.html"><i class="fas fa-clipboard-list"></i>Información</a></li>
+                <li><a href="editar_info.html"><i class="fas fa-address-card"></i>Editar Información</a></li>
+                <li><a href="solicitar_servicios.html"><i class="fas fa-arrow-pointer"></i>Solicitar Servicios</a></li>
+                <li><a href="solicitudes.html"><i class="fa-solid fa-window-restore"></i> Solicitudes</a></li>
+                <li>
+                    <form action="./services/deleteSession.php" method="post">
+                        <button type="submit" class="fas fa-cog">Salir</button>
+                    </form>
+                </li>
+
+            </ul>
+            <div class="social_media">
+                <a href="https://www.facebook.com/metrodemedellin/" target="_blank"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/metrodemedellin/" target="_blank"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/metrodemedellin/" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="main_content">
+
+            <div class="header" align="center">Solicitudes</div>
+            <div class="info">
+                <div align="center">
+                    <img src="img/abc.png" width="146" height="194">
+                    <p class="titulo" id="userID"></p>
+                    <p class="g"><strong>Lea atentamente su registro de información, en caso de encontrar algún error,
+                            corregirlo en el apartado "Editar Información".<br>
+                </div>
+
+                <table summary="estudiante">
+                    
+                        <tr>
+                            <td>Codigo de la Cita</td>
+                            <td>Fecha de la Cita</td>
+                            <td>Servicio</td>
+                            <td>Dispositivo</td>
+                            <td>Nombre del Dispositivo</td>
+                            <td>Cancelar</td>
+                        </tr>
+                        <tr>
+                            <td id="codigo_cita"></td>
+                            <td id="fecha"></td>
+                            <td id="servicio"></td>
+                            <td id="dispositivo"></td>
+                            <td id="nombre_dispositivo"></td>
+                            <td><a href="./services/deleteServices.php?codigo_cita=<?php echo $codigo_cita; ?>" class="btn-eliminar">Eliminar</a></td>
+
+                        </tr>
+
+                </table>
+
+                <br>
+
+                <div align="center">SI ENCUENTRA ALGÚN PROBLEMA, COMÚNIQUESE CON SERVICIO AL CLIENTE</div>
+
+                <!-- FOOTER -->
+                <div id="footer" class="p-5">
+                    <div class="container w-50 pt-5">
+                        <div class="row wor-cols-md-2 justify-content-md-center">
+                            <div class="row justify-content-md-center py-2">
+                                <div class="text" align="right">
+                                    <p>Informática y Mantenimiento de Equipos de Cómputo</p>
+                                    <p>Carrera 49, Cl. 7 Sur #50</p>
+                                    <p>Medellín, Antioquia</p>
+                                    <p>IMEC Ltda</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

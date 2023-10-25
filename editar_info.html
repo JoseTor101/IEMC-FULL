@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Info</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/register.css">
+  <link href="img/logo.png" rel="icon">
+
+  <style>
+    .bg{
+      background-image:url(img/update.png);
+      width: 550px;
+      height:800px;
+
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-sm navbar-light bg-white">
+    <div class="container-fluid">
+        <img src="img/logo.png" alt="" width="50">
+      </a>
+
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expandend="false" aria-label="Toogle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="menu.html"
+          rel="import">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="informacion_perfil.html"
+          rel="import">Información</a></li>
+          <li class="nav-item"><a class="nav-link" href="solicitar_servicios.html"
+          rel="import">Solicitar Servicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="servicios.html"
+            rel="import">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html"
+          rel="import">Salir</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container w-75 bg-dark mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+      <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
+
+      </div>
+      <div class="col bg-white p-5 rounded-end">
+        <div class="text-end">
+        </div>
+
+        <h2 class="fw-bold text-end py-5">Cambio de Información</h2>
+        <label>Digite sus datos a continuación, podrá cambiarlos después.<br>
+          <p> </p></label>
+
+
+        <!--Log-->
+
+        <form action="../p/services/updateUser.php" method="post">
+          <div class="mb-4">
+            
+            <label>Nombre</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Ingrese el nombre"
+              required>
+            <label>Correo</label>
+            <input type="email" name="location" id="ubicacion" class="form-control" placeholder="Ingrese su correo"
+              required>
+            <label>Telefono</label>
+            <input type="text" name="station_id" id="ubicacion" class="form-control" placeholder="Ingrese su teléfono"
+              required>
+            <label>Cedula</label>
+            <input type="text" name="employees" id="name" class="form-control" placeholder="Ingrese su cédula"
+              required>
+            <label>Contraseña</label>
+            <input type="password" name="password" class="form-control" id="inputPassword3"
+              placeholder="Ingrese su clave" required>
+          </div>
+
+          <div class="d-grid">
+
+            <button type="submit" style="background-color: rgb(92, 20, 97);" class="btn btn-primary" href="informacion_perfil.html" rel="import">Enviar</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+</body>
+</html>

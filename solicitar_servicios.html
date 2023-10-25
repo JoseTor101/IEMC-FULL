@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Solicitar Servicios</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/inform.css">
+  <link href="img/logo.png" rel="icon">
+  <script src="https://kit.fontawesome.com/5a20391863.js" crossorigin="anonymous"></script>
+  <style>
+    ul {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style: none;
+      text-decoration: none;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+
+    ul>li>a {
+      text-decoration: none;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Menu lateral -->
+  <div class="wrapper">
+    <div class="sidebar">
+      <img src="img/logo.png" width="200">
+      <ul>
+        <li><a href="menu.html"><i class="fas fa-home"></i>Inicio</a></li>
+        <li><a href="informacion_perfil.html"><i class="fas fa-clipboard-list"></i>Información</a></li>
+        <li><a href="editar_info.html"><i class="fas fa-address-card"></i>Editar Información</a></li>
+        <li><a href="solicitar_servicios.html"><i class="fas fa-arrow-pointer"></i>Solicitar Servicios</a></li>
+        <li><a href="solicitudes.html"><i class="fa-solid fa-window-restore"></i>   Solicitudes</a></li>
+        <li>
+          <form action="./services/deleteSession.php" method="post">
+            <button type="submit" class="fas fa-cog">Salir</button>
+          </form>
+        </li>
+      </ul>
+      <div class="social_media">
+        <a href="https://www.facebook.com/metrodemedellin/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/company/metrodemedellin/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/metrodemedellin/" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <!-- Contenido central -->
+    <div class="main_content">
+
+      <div class="serviciosHeader" align="center">Solicitud de servicios</div>
+      <div class="info">
+        <div align="center">
+          <img src="img/abc.png" width="146" height="194">
+          <p class="titulo" id="userID"></p>
+        </div>
+
+        <div align="center">
+          <div class="form-container">
+            <div align="center" class="container w-75 bg-dark mt-5 rounded shadow">
+              <h3 class="fw-bold text-end py-5">Especificar detalles de la cita:</h3>
+              <form id="servicios" action="../p/services/registerService.php" method="post">
+                <div class="mb-4">
+                  <label for="serv">Servicion requerido:</label>
+                  <select id="serv" name="serv" class="servicio" style="text-align: center;">
+                    <option value="mantenimiento">Mantenimiento</option>
+                    <option value="instalacion">Instalación</option>
+                    <option value="reparacion">Reparación</option>
+                  </select><br><br>
+
+                  <label for="fecha_prestacion">Fecha de Prestación:</label>
+                  <input type="datetime-local" id="fecha_prestacion" name="fecha_prestacion" required><br><br>
+
+                  <label for="fecha_final">Fecha Final:</label>
+                  <input type="datetime-local" id="fecha_final" name="fecha_final" required><br><br>
+
+                  <label for="nombre_dispositivo">Nombre del Dispositivo:</label>
+                  <input type="text" id="nombre_dispositivo" name="nombre_dispositivo" required><br><br>
+
+                  <label for="modelo_dispositivo">Modelo del Dispositivo:</label>
+                  <input type="text" id="modelo_dispositivo" name="modelo_dispositivo" required><br><br>
+
+                  <label for="especificaciones">Especificaciones del Dispositivo:</label><br>
+                  <textarea id="especificaciones" name="especificaciones" maxlength="300" required></textarea><br><br>
+
+                </div>
+                <div class="d-grid">
+                  <button type="submit" id="envio" style="background-color: rgb(92, 20, 97);" class="btn btn-primary" rel="import">Enviar</button>
+                </div>
+                <br><br>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div id="footer" class="p-5">
+          <div class="container w-50 pt-5">
+            <div class="row wor-cols-md-2 justify-content-md-center">
+              <div class="row justify-content-md-center py-2">
+                <div class="text" align="right">
+                  <p>Informática y Mantenimiento de Equipos de Cómputo</p>
+                  <p>Carrera 49, Cl. 7 Sur #50</p>
+                  <p>Medellín, Antioquia</p>
+                  <p>IMEC Ltda</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    var correoEncoded = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('correo='))
+        .split('=')[1];
+
+    // Decodifica el correo
+    var correo = decodeURIComponent(correoEncoded.replace(/\+/g, ' '));
+
+    document.getElementById("servicios").addEventListener('submit', enviarCorreo);
+
+
+    function enviarCorreo(event) {    
+      //  event.preventDefault(); // Evita el envío del formulario por defecto
+
+      const form = event.target; // Obtén el formulario que se envió
+      const apiKey = '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'; // Reemplaza con tu API Key de SendGrid
+      const url = 'https://api.sendgrid.com/v3/mail/send';
+
+      const data = {
+        personalizations: [
+          {
+            to: [
+              {
+                email: correo, // Dirección de correo del destinatario
+              },
+            ],
+            subject: 'Solicitud de servicios - IEMC',
+          },
+        ],
+        from: {
+          email: 'alejandrotordecilla12@gmail.com', // Dirección de correo del remitente
+        },
+        content: [
+            {
+            type: 'text/plain',
+            value: `Hola, A continuación información sobre el servicio solicitado en IEMC:\n\nDetalles:\n\nTipo de servicio: ${form.serv.value}\nFecha de inicio: ${form.fecha_prestacion.value}\nFecha final: ${form.fecha_final.value}\nNombre dispositivo: ${form.nombre_dispositivo.value}\nModelo: ${form.modelo_dispositivo.value}\nDetalles: ${form.especificaciones.value}`,
+            },
+            {
+            type: 'text/html',
+            value: `<html>
+                        <body>
+                        <p style="font-weight:bold;">Hola,</p>
+                        <p style="font-weight:bold;">A continuación información sobre el servicio solicitado en IEMC:</p>
+                        <p><strong>Detalles:</strong></p>
+                        <ul>
+                            <li><strong>Tipo de servicio:</strong> ${form.serv.value}</li>
+                            <li><strong>Fecha de inicio:</strong> ${form.fecha_prestacion.value}</li>
+                            <li><strong>Fecha final:</strong> ${form.fecha_final.value}</li>
+                            <li><strong>Nombre dispositivo:</strong> ${form.nombre_dispositivo.value}</li>
+                            <li><strong>Modelo:</strong> ${form.modelo_dispositivo.value}</li>
+                            <li><strong>Detalles:</strong> ${form.especificaciones.value}</li>
+                        </ul>
+                        </body>
+                    </html>`,
+            },
+        ],
+      };
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then(function (response) {
+          if (response.ok) {
+            console.log('Correo enviado con éxito');
+          } else {
+            console.log('Ocurrió un error al enviar el correo');
+          }
+        })
+        .catch(function (error) {
+          console.error('Ocurrió un error al enviar el correo:', error);
+        });
+    };
+  </script>
+
+</body>
+
+</html>

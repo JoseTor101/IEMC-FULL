@@ -1,0 +1,67 @@
+#ribbon{
+    background-color: rgb(255, 255, 255);
+
+}
+
+#ribbon::after{
+    content: '';
+    background-color: transparent;
+    display: block;
+    height: 20px;
+    width: 50%;
+    margin: 0 auto;
+    position: relative;
+    left: auto;
+    margin-top: -40px;
+}
+
+#cuadrito{
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    margin-top: -20px;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(20, 0, 0);
+}
+
+.text-shadow{
+    text-shadow: 0 3px 3px rgba(0,0,0,0.6);
+}
+
+#separator-ribbon{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+#separator-ribbon .content{
+    width: 150%;
+    height: 150px;
+    margin-left: -25%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.card-border{
+    border: solid 10px white;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all ease-out 0.2s;
+}
+.card-border:hover{
+    transform: scale(1.05);
+}
+
+#desc{
+    background: rgb(255,255,255);
+    background: url(../img/new/fondofoot.png);
+    background-color: black;
+    background-repeat: repeat-x;
+    background-size: 75%;
+    margin-top: -20px;
+}
+
+#footer{
+    background: url(../img/bg-04.png);
+    background-color: white;
+    background-size: 50px 50px;
+}

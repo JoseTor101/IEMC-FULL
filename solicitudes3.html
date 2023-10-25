@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitudes</title>
+    <link rel="stylesheet" href="css/inform.css">
+    <link href="img/logo.png" rel="icon">
+    <script src="https://kit.fontawesome.com/5a20391863.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <img src="img/logo.png" width="200">
+            <ul>
+                <li><a href="menu.html"><i class="fas fa-home"></i>Inicio</a></li>
+                <li><a href="informacion_perfil.html"><i class="fas fa-clipboard-list"></i>Información</a></li>
+                <li><a href="editar_info.html"><i class="fas fa-address-card"></i>Editar Información</a></li>
+                <li><a href="solicitar_servicios.html"><i class="fas fa-arrow-pointer"></i>Solicitar Servicios</a></li>
+                <li><a href="solicitudes.html"><i class="fa-solid fa-window-restore"></i> Solicitudes</a></li>
+                <li>
+                    <form action="./services/deleteSession.php" method="post">
+                        <button type="submit" class="fas fa-cog">Salir</button>
+                    </form>
+                </li>
+            </ul>
+            <div class="social_media">
+                <a href="https://www.facebook.com/metrodemedellin/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/metrodemedellin/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/metrodemedellin/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="main_content">
+            <div class="header" align="center">Solicitudes</div>
+            <div class="info">
+                <div align="center">
+                    <img src="img/abc.png" width="146" height="194">
+                    <p class="titulo" id="userID"></p>
+                    <p class="g"><strong>Lea atentamente su registro de información, en caso de encontrar algún error, corregirlo en el apartado "Editar Información".</strong></p>
+                </div>
+
+                <table id="tablaSolicitudes" summary="estudiante">
+                    <thead>
+                        <tr>
+                            <th>Fecha de la Cita</th>
+                            <th>Servicio</th>
+                            <th>Dispositivo</th>
+                            <th>Nombre del Dispositivo</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <script type="text/javascript">
+                    function actualizarTabla() {
+                        $.getJSON("http://localhost/p/services/getServices.php", function(data) {
+                            //const tbody = $("#tablaSolicitudes tbody");
+        
+                            // Limpiar el contenido existente del tbody
+                            //tbody.empty();
+        
+                            // Generar las filas de la tabla con los datos obtenidos
+                            data.forEach(function(row) {
+                                const tr = $("<tr>");
+        
+                                const tdFecha = $("<td>").text(row.fecha_prestacion);
+                                tr.append(tdFecha);
+        
+                                const tdServicio = $("<td>").text(row.servicio);
+                                tr.append(tdServicio);
+        
+                                const tdDispositivo = $("<td>").text(row.modelo_dispositivo);
+                                tr.append(tdDispositivo);
+        
+                                const tdNombreDispositivo = $("<td>").text(row.nombre_dispositivo);
+                                tr.append(tdNombreDispositivo);
+        
+                                tbody.append(tr);
+                            });
+                        });
+                    }
+        
+                    $(document).ready(function() {
+                        // Actualizar la tabla al cargar la página
+                        actualizarTabla();
+        
+                        // Actualizar la tabla cada 5 segundos
+                        setInterval(actualizarTabla, 5000);
+                    });
+                </script>
+                <br>
+
+                <div align="center">SI ENCUENTRA ALGÚN PROBLEMA, COMÚNIQUESE CON SERVICIO AL CLIENTE</div>
+
+                <!-- FOOTER -->
+                <div id="footer" class="p-5">
+                    <div class="container w-50 pt-5">
+                        <div class="row wor-cols-md-2 justify-content-md-center">
+                            <div class="row justify-content-md-center py-2">
+                                <div class="text" align="right">
+                                    <p>Informática y Mantenimiento de Equipos de Cómputo</p>
+                                    <p>Carrera 49, Cl. 7 Sur #50</p>
+                                    <p>Medellín, Antioquia</p>
+                                    <p>IMEC Ltda</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

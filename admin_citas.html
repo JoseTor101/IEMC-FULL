@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Citas</title>
+    <link rel="stylesheet" href="css/inform.css">
+    <link href="img/logo.png" rel="icon">
+    <script src="https://kit.fontawesome.com/5a20391863.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        fetch("http://localhost/p/services/getServicesAdmin.php")
+    .then((res) => res.json())
+    .then((citas) => {
+        const citasTable = document.getElementById("citasTable");
+
+        citas.forEach((cita) => {
+            const tableRow = document.createElement('tr');
+            const nombreCell = document.createElement('td');
+            const codigoCitaCell = document.createElement('td');
+            const fechaCell = document.createElement('td');
+            const servicioCell = document.createElement('td');
+            const dispositivoCell = document.createElement('td');
+            const nombreDispositivoCell = document.createElement('td');
+            const cancelarCell = document.createElement('td');
+
+            nombreCell.innerHTML = cita.nombre;
+            codigoCitaCell.innerHTML = cita.codigo_cita;
+            fechaCell.innerHTML = cita.fecha_prestacion;
+            servicioCell.innerHTML = cita.servicio;
+            dispositivoCell.innerHTML = cita.modelo_dispositivo;
+            nombreDispositivoCell.innerHTML = cita.nombre_dispositivo;
+            cancelarCell.innerHTML = `<a href="./services/deleteServices.php?codigo_cita=${cita.codigo_cita}" class="btn-eliminar">Eliminar</a>`;
+
+            tableRow.appendChild(nombreCell);
+            tableRow.appendChild(codigoCitaCell);
+            tableRow.appendChild(fechaCell);
+            tableRow.appendChild(servicioCell);
+            tableRow.appendChild(dispositivoCell);
+            tableRow.appendChild(nombreDispositivoCell);
+            tableRow.appendChild(cancelarCell);
+
+            citasTable.appendChild(tableRow);
+        });
+    });
+    </script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="sidebar">
+            <img src="img/logo.png" width="200">
+            <ul>
+                <li><a href="menu.html"><i class="fas fa-home"></i>Inicio</a></li>
+                <li><a href="admin_citas.html"><i class="fa-solid fa-window-restore"></i> Citas</a></li>
+                <li>
+                    <form action="./services/deleteSession.php" method="post">
+                        <button type="submit" class="fas fa-cog">Salir</button>
+                    </form>
+                </li>
+
+            </ul>
+            <div class="social_media">
+                <a href="https://www.facebook.com/metrodemedellin/" target="_blank"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/metrodemedellin/" target="_blank"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/metrodemedellin/" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="main_content">
+
+            <div class="header" align="center">Solicitudes</div>
+            <div class="info">
+                <div align="center">
+                    <img src="img/abc.png" width="146" height="194">
+                    <p class="titulo" id="userID"></p>
+                    <p class="g"><strong>Lea atentamente su registro de información, en caso de encontrar algún error,
+                            corregirlo en el apartado "Editar Información".<br>
+                </div>
+
+                <table id="citasTable" summary="estudiante">
+                    <tr>
+                        <td>Nombre</td>
+                        <td>Codigo de la Cita</td>
+                        <td>Fecha de la Cita</td>
+                        <td>Servicio</td>
+                        <td>Dispositivo</td>
+                        <td>Nombre del Dispositivo</td>
+                        <td>Cancelar</td>
+                    </tr>
+                </table>                
+                <br>
+
+                <div align="center">SI ENCUENTRA ALGÚN PROBLEMA, COMÚNIQUESE CON SERVICIO AL CLIENTE</div>
+
+                <!-- FOOTER -->
+                <div id="footer" class="p-5">
+                    <div class="container w-50 pt-5">
+                        <div class="row wor-cols-md-2 justify-content-md-center">
+                            <div class="row justify-content-md-center py-2">
+                                <div class="text" align="right">
+                                    <p>Informática y Mantenimiento de Equipos de Cómputo</p>
+                                    <p>Carrera 49, Cl. 7 Sur #50</p>
+                                    <p>Medellín, Antioquia</p>
+                                    <p>IMEC Ltda</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

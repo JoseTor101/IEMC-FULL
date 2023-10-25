@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/register.css">
+  <link href="img/logo.png" rel="icon">
+
+  <style>
+    .bg {
+      background-image: url(img/register.png);
+      width: 550px;
+      height: 1000px;
+    }
+  </style>
+  <script type="text/javascript" defer>
+    fetch("http://localhost/p/services/getStations.php")
+      .then((res) => res.json())
+      .then((data) => {
+        let select = document.getElementById("emetro");
+        data.forEach((station) => {
+          let option = document.createElement("option");
+          option.value = station.id;
+          option.innerHTML = station.name;
+
+          select.appendChild(option);
+        });
+      });
+
+    function validatePassword() {
+      const password = document.getElementById("inputPassword3").value;
+      const passwordError = document.getElementById("passwordError");
+
+      // Password requirements
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+      if (!passwordRegex.test(password)) {
+        passwordError.innerText = "La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial.";
+        return false;
+      } else {
+        passwordError.innerText = "";
+        return true;
+      }
+    }
+
+    function validateForm() {
+      const isPasswordValid = validatePassword();
+      return isPasswordValid;
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-sm navbar-light bg-white">
+    <div class="container-fluid">
+      <img src="img/logo.png" alt="" width="50">
+      </a>
+
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expandend="false" aria-label="Toogle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html" rel="import">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html" rel="import">Iniciar Sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container w-75 bg-dark mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+      <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
+
+      </div>
+      <div class="col bg-white p-5 rounded-end">
+        <div class="text-end">
+        </div>
+
+        <h2 class="fw-bold text-end py-5">Bienvenidos</h2>
+          <label>Digite sus datos a continuación, podrá cambiarlos después.<br>
+            <p> </p>
+          </label>
+  
+  
+          <!--Log-->
+  
+          <form action="./services/addUser.php" method="post" onsubmit="return validateForm()">
+            <div class="mb-4">
+  
+              <label>Nombre</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Ingrese el nombre"
+                required>
+              <label>Correo</label>
+              <input type="email" name="location" id="ubicacion" class="form-control" placeholder="Ingrese su correo"
+                required>
+              <label>Telefono</label>
+              <input type="text" name="station_id" id="ubicacion" class="form-control" placeholder="Ingrese su teléfono"
+                required>
+              <label>Cedula</label>
+              <input type="text" name="employees" id="name" class="form-control" placeholder="Ingrese su cédula"
+                required>
+              <label>Contraseña</label>
+              <input type="password" name="password" class="form-control" id="inputPassword3"
+                placeholder="Ingrese su clave" required>
+              <span id="passwordError" style="color: rgb(108, 37, 107);"></span>
+            </div>
+  
+            <div class="d-grid">
+  
+              <button type="submit" style="background-color: rgb(92, 20, 97);" class="btn btn-primary" href="login.html"
+                rel="import">Registrarse</button>
+            </div>
+  
+          </form>
+  
+        </div>
+      </div>
+  </body>
+  
+  </html>
+  
